@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="_create" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CreateController">
+   <children>
+      <TextArea fx:id="textArea1" layoutX="14.0" layoutY="99.0" prefHeight="425.0" prefWidth="385.0" />
+      <TextArea fx:id="textArea2" layoutX="601.0" layoutY="88.0" prefHeight="425.0" prefWidth="385.0" />
+      <TextField fx:id="_textfield" layoutX="14.0" layoutY="43.0" />
+      <TextField layoutX="238.0" layoutY="43.0" />
+      <Button layoutX="52.0" layoutY="541.0" mnemonicParsing="false" onAction="#MainMenu" text="Main Menu" />
+      <Button layoutX="443.0" layoutY="43.0" mnemonicParsing="false" onAction="#search" text="search" />
+      <Button layoutX="462.0" layoutY="386.0" mnemonicParsing="false" onAction="#play" text="Play" />
+      <Button layoutX="836.0" layoutY="541.0" mnemonicParsing="false" onAction="#Save" text="Save Audio" />
+      <MenuButton fx:id="_MenuButton" layoutX="455.0" layoutY="312.0" mnemonicParsing="false" text="Vioces">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
+      <Button layoutX="454.0" layoutY="234.0" mnemonicParsing="false" onAction="#select" text="&gt;&gt;" />
+   </children>
+</AnchorPane>
