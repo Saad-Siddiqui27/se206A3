@@ -6,17 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 
 public class CreateController {
@@ -29,6 +23,12 @@ public class CreateController {
     TextArea textArea1;
     @FXML
     TextArea textArea2;
+    @FXML
+    MenuButton _menubutton;
+    @FXML
+    CheckMenuItem _voice1;
+    @FXML
+    CheckMenuItem _voice2;
 
 
 
@@ -99,32 +99,80 @@ public class CreateController {
 }
 
 
-public void select(){
+public String select(){
         String str = textArea1.getSelectedText();
-    System.out.println("yes");
         textArea2.setText(str);
-//        return str;
+
+        return str;
 }
 
-File f = new File("two.scm");
+    File f = new File("voice1.scm");
+
+
 
 public void play(){
         String str = textArea1.getSelectedText();
 
-//        String cmd2 = "echo "+str+ "| festival --tts";
-//    String cmd2 = "festival -b (voice_akl_nz_jdt_diphone );; (SayText \" hi bro\")";
-    String cmd2 = "festival -b (SayText \" hi bro\")";
-//    String cmd3 = "touch two.scm;; echo \"(voice_akl_nz_jdt_diphone );; (SayText \" hi bro\") >> one.scm; festival -b one.scm ";
-    String cmd3 = "touch two.scm; echo \"(voice_akl_nz_jdt_diphone) ;; (SayText \"hi bro\")\" >>"+f+" ; festival -b "+f;
-    pbuild(cmd3);
-        pbuild(cmd2);
+
+
+
+    try {
+        if(_voice1.isSelected()) {
+            System.out.println("yes");
+            FileWriter fw = new FileWriter(f);
+            fw.write("(voice_akl_nz_jdt_diphone) ;; select Jono" + " \n(SayText \"" + str + "\")");
+            fw.close();
+            String cmd3 = "festival -b " + f;
+            pbuild(cmd3);
+        }else if(_voice2.isSelected()){
+            System.out.println("no");
+            FileWriter fw = new FileWriter(f);
+            fw.write("(voice_kal_diphone) ;; select Jono" + " \n(SayText \"" + str + "\")");
+            fw.close();
+            String cmd3 = "festival -b " + f;
+            pbuild(cmd3);
+
+        }
+    }catch(Exception e){
+        e.printStackTrace();
+    }
 
 
 }
 
 public void Save(){
 
+    try {
+        String str2 = textArea2.getText();
+
+
+        if(_voice1.isSelected()) {
+            helpSave(str2, "(voice_akl_nz_jdt_diphone) ");
+        }else if(_voice2.isSelected()){
+            helpSave(str2, "(voice_kal_diphone) ");
+
+        }
+    }catch(Exception e){
+        e.printStackTrace();
+    }
+
+//    String str2 = textArea2.getText();
+////    String cmd4 = "festival; (utt.save.wave (SayText \""+str2+"\") \"name.wav\" 'riff)";
+//    String cmd4 = "text2wave -o some.wav "+str2+" -eval slow.scm";
+//    pbuild(cmd4);
 }
+
+    public void helpSave(String str2, String s) throws IOException {
+        File f2 = new File("text");
+        FileWriter fw2 = new FileWriter(f2);
+        fw2.write(str2);
+        fw2.close();
+        FileWriter fw = new FileWriter(f);
+        fw.write(s);
+        fw.close();
+        String cmd3 = "text2wave -o some.wav "+f2+" -eval "+f;
+        pbuild(cmd3);
+    }
 
 
     public void pbuild(String cmd){
