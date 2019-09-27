@@ -12,11 +12,11 @@
       <TextArea fx:id="textArea1" layoutX="14.0" layoutY="99.0" prefHeight="425.0" prefWidth="385.0" />
       <TextArea fx:id="textArea2" layoutX="601.0" layoutY="88.0" prefHeight="425.0" prefWidth="385.0" />
       <TextField fx:id="_textfield" layoutX="14.0" layoutY="43.0" />
-      <TextField layoutX="238.0" layoutY="43.0" />
+      <TextField fx:id="_textfield2" layoutX="238.0" layoutY="43.0" />
       <Button layoutX="52.0" layoutY="541.0" mnemonicParsing="false" onAction="#MainMenu" text="Main Menu" />
       <Button layoutX="443.0" layoutY="43.0" mnemonicParsing="false" onAction="#search" text="search" />
       <Button layoutX="462.0" layoutY="386.0" mnemonicParsing="false" onAction="#play" text="Play" />
-      <Button layoutX="836.0" layoutY="541.0" mnemonicParsing="false" onAction="#Save" text="Save Audio" />
+      <Button layoutX="660.0" layoutY="541.0" mnemonicParsing="false" onAction="#Save" text="Save Audio" />
       <MenuButton fx:id="_menubutton" layoutX="455.0" layoutY="312.0" mnemonicParsing="false" text="Vioces">
         <items>
             <CheckMenuItem fx:id="_voice1" mnemonicParsing="false" text="Auckland Voice" />
@@ -24,5 +24,6 @@
         </items>
       </MenuButton>
       <Button layoutX="454.0" layoutY="234.0" mnemonicParsing="false" onAction="#select" text="&gt;&gt;" />
+      <TextField fx:id="_audioName" layoutX="777.0" layoutY="541.0" promptText="Enter Audio name" />
    </children>
 </AnchorPane>

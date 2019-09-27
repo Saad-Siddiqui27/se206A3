@@ -11,6 +11,20 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.util.List;
+import java.util.StringTokenizer;
+
+
+
+//Henry Imports
+
+import java.io.*;
+import com.flickr4java.flickr.*;
+import com.flickr4java.flickr.photos.*;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.File;
+import javax.imageio.ImageIO;
 
 
 public class CreateController {
@@ -20,19 +34,27 @@ public class CreateController {
     @FXML
     private TextField _textfield;
     @FXML
-    TextArea textArea1;
+    private TextArea textArea1;
     @FXML
-    TextArea textArea2;
+    private TextArea textArea2;
     @FXML
-    MenuButton _menubutton;
+    private MenuButton _menubutton;
     @FXML
-    CheckMenuItem _voice1;
+    private CheckMenuItem _voice1;
     @FXML
-    CheckMenuItem _voice2;
+    private CheckMenuItem _voice2;
+    @FXML
+    private TextField _audioName;
+    @FXML
+    private TextField _textfield2;
 
 
 
     String term;
+    //Henry part;
+    String num;
+    int number;
+    //done
 
 
     public void search() {
@@ -96,12 +118,93 @@ public class CreateController {
 
     }
 
+
+        //Henry's part
+        num = _textfield2.getText();
+        number = Integer.parseInt(num);
+        if (number > 10) {
+            number = 10;
+        }
+        if (number <= 0) {
+            number = 1;
+        }
+
+        try {
+            String apiKey = getAPIKey("apiKey");
+            String sharedSecret = getAPIKey("sharedSecret");
+
+            Flickr flickr = new Flickr(apiKey, sharedSecret, new REST());
+
+            String query = term;
+            int resultsPerPage = 10;
+            int page = 0;
+
+            PhotosInterface photos = flickr.getPhotosInterface();
+            SearchParameters params = new SearchParameters();
+            params.setSort(SearchParameters.RELEVANCE);
+            params.setMedia("photos");
+            params.setText(query);
+
+            PhotoList<Photo> results = photos.search(params, resultsPerPage, page);
+            System.out.println("Retrieving " + results.size() + " results");
+            int i = 1;
+
+            for (Photo photo : results) {
+                if (i <= number) {
+                    try {
+                        BufferedImage image = photos.getImage(photo, Size.SMALL);
+                        String filename = term + Integer.toString(i) + ".jpg";
+                        File outputfile = new File(filename);
+                        ImageIO.write(image, "jpg", outputfile);
+                        System.out.println("Downloaded " + filename);
+                        i = i + 1;
+                    } catch (FlickrException | IOException fe) {
+                        System.err.println("Ignoring image " + photo.getId() + ": " + fe.getMessage());
+                    }
+                } else {
+                    break;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("\nDone");
+
+
 }
+
+
+//Henry's Method
+private static String getAPIKey(String key) throws Exception {
+    // TODO fix the following based on where you will have your config file stored
+
+    String config = System.getProperty("user.dir")
+            + System.getProperty("file.separator") + "flickr-api-keys.txt";
+
+//		String config = System.getProperty("user.home")
+//				+ System.getProperty("file.separator")+ "bin"
+//				+ System.getProperty("file.separator")+ "flickr-api-keys.txt";
+    File file = new File(config);
+    BufferedReader br = new BufferedReader(new FileReader(file));
+
+    String line;
+    while ((line = br.readLine()) != null) {
+        if (line.trim().startsWith(key)) {
+            br.close();
+            return line.substring(line.indexOf("=") + 1).trim();
+        }
+    }
+    br.close();
+    throw new RuntimeException("Couldn't find " + key + " in config file " + file.getName());
+}
+//finish
 
 
 public String select(){
         String str = textArea1.getSelectedText();
-        textArea2.setText(str);
+        textArea2.appendText(str);
 
         return str;
 }
@@ -114,18 +217,15 @@ public void play(){
         String str = textArea1.getSelectedText();
 
 
-
-
     try {
         if(_voice1.isSelected()) {
-            System.out.println("yes");
+
             FileWriter fw = new FileWriter(f);
             fw.write("(voice_akl_nz_jdt_diphone) ;; select Jono" + " \n(SayText \"" + str + "\")");
             fw.close();
             String cmd3 = "festival -b " + f;
             pbuild(cmd3);
         }else if(_voice2.isSelected()){
-            System.out.println("no");
             FileWriter fw = new FileWriter(f);
             fw.write("(voice_kal_diphone) ;; select Jono" + " \n(SayText \"" + str + "\")");
             fw.close();
@@ -140,26 +240,33 @@ public void play(){
 
 }
 
-public void Save(){
+public void Save() {
 
-    try {
-        String str2 = textArea2.getText();
+    StringTokenizer tokens = new StringTokenizer(textArea2.getText());
+    int i = tokens.countTokens();
+
+    System.out.println(i);
+    if (i > 40) {
+
+        //To do Alerts;
+    } else {
+
+        try {
+            String str2 = textArea2.getText();
 
 
-        if(_voice1.isSelected()) {
-            helpSave(str2, "(voice_akl_nz_jdt_diphone) ");
-        }else if(_voice2.isSelected()){
-            helpSave(str2, "(voice_kal_diphone) ");
+            if (_voice1.isSelected()) {
+                helpSave(str2, "(voice_akl_nz_jdt_diphone) ");
+            } else if (_voice2.isSelected()) {
+                helpSave(str2, "(voice_kal_diphone) ");
 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    }catch(Exception e){
-        e.printStackTrace();
+
     }
 
-//    String str2 = textArea2.getText();
-////    String cmd4 = "festival; (utt.save.wave (SayText \""+str2+"\") \"name.wav\" 'riff)";
-//    String cmd4 = "text2wave -o some.wav "+str2+" -eval slow.scm";
-//    pbuild(cmd4);
 }
 
     public void helpSave(String str2, String s) throws IOException {
@@ -170,7 +277,7 @@ public void Save(){
         FileWriter fw = new FileWriter(f);
         fw.write(s);
         fw.close();
-        String cmd3 = "text2wave -o some.wav "+f2+" -eval "+f;
+        String cmd3 = "text2wave -o "+_audioName.getText()+".wav "+f2+" -eval "+f;
         pbuild(cmd3);
     }
 
@@ -181,28 +288,7 @@ public void Save(){
 
             Process process = pb.start();
 
-//            BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
-//            BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-//
-//            int exitStatus = process.waitFor();
-//
-//            StringBuilder sb = new StringBuilder();
-//            if (exitStatus == 0) {
-//                String line;
-//                int count =1;
-//                while ((line = stdout.readLine()) != null) {
-//                    sb.append(count++ + ". "+line).append("\n");
-//
-//                }
-//            } else {
-//                String line;
-//                while ((line = stderr.readLine()) != null) {
-//                    System.err.println(line);
-//                }
-//            }
-//
-//            textArea1.setText(sb.toString());
-//
+
 
         } catch(Exception e){
             e.printStackTrace();
