@@ -202,6 +202,9 @@ private static String getAPIKey(String key) throws Exception {
 //finish
 
 
+
+
+
 public String select(){
         String str = textArea1.getSelectedText();
         textArea2.appendText(str);
