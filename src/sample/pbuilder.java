@@ -55,6 +55,7 @@ public class pbuilder {
 
                 if (exitStatus == 0) {
                     String line;
+                    _stdOut.clear();// here.
                     while ((line = stdout.readLine()) != null) {
 
                         _stdOut.add(line);

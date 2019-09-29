@@ -25,5 +25,6 @@
       </MenuButton>
       <Button layoutX="454.0" layoutY="234.0" mnemonicParsing="false" onAction="#select" text="&gt;&gt;" />
       <TextField fx:id="_audioName" layoutX="777.0" layoutY="541.0" promptText="Enter Audio name" />
+      <Button layoutX="706.0" layoutY="30.0" mnemonicParsing="false" onAction="#CombineVideo" text="video" />
    </children>
 </AnchorPane>

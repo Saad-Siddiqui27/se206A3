@@ -49,6 +49,9 @@ public class CreateController {
     private TextField _textfield2;
 
 
+    File audio = new File(_textfield.getText());
+
+
 
     String term;
     //Henry part;
@@ -152,12 +155,14 @@ public class CreateController {
             for (Photo photo : results) {
                 if (i <= number) {
                     try {
+
                         BufferedImage image = photos.getImage(photo, Size.SMALL);
                         String filename = term + Integer.toString(i) + ".jpg";
                         File outputfile = new File(filename);
                         ImageIO.write(image, "jpg", outputfile);
                         System.out.println("Downloaded " + filename);
                         i = i + 1;
+
                     } catch (FlickrException | IOException fe) {
                         System.err.println("Ignoring image " + photo.getId() + ": " + fe.getMessage());
                     }
@@ -169,6 +174,14 @@ public class CreateController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        if(! audio.exists()) {
+            String cmd5 = "mkdir " + _textfield.getText() + "; mv *.jpg " + _textfield.getText();
+            pbuilder.getInstance().probuild(cmd5);
+        }
+        String cmd5 = "mv *.jpg \" + _textfield.getText()";
+        pbuilder.getInstance().probuild(cmd5);
+
 
         System.out.println("\nDone");
 
@@ -248,7 +261,7 @@ public void Save() {
     StringTokenizer tokens = new StringTokenizer(textArea2.getText());
     int i = tokens.countTokens();
 
-    System.out.println(i);
+
     if (i > 40) {
 
         //To do Alerts;
@@ -282,6 +295,14 @@ public void Save() {
         fw.close();
         String cmd3 = "text2wave -o "+_audioName.getText()+".wav "+f2+" -eval "+f;
         pbuild(cmd3);
+
+        if(! audio.exists()) {
+            String cmd4 = "mkdir " + _textfield.getText();
+            pbuilder.getInstance().probuild(cmd4);
+        }
+        String cmd5 = "mv "+_audioName.getText() + ".wav ./"+_textfield.getText();
+        pbuilder.getInstance().probuild(cmd5);
+
     }
 
 
@@ -324,6 +345,38 @@ public void Save() {
     }
 
 
+
+
+
+
+
+    //Henry new code.
+
+
+    public void CombineVideo() throws IOException {
+        System.out.println("Video");
+        File f = new File("input.txt");
+        FileWriter fw = new FileWriter(f);
+        int i = 1;
+        while(i<=number){
+            String cmd = "ffmpeg -loop 1 -i " + term + i + ".jpg -c:v libx264 -t 3 -pix_fmt yuv420p " + term + "temp" + i + ".mkv";
+            pbuild(cmd);
+            fw.write("file " + term + "temp" + i + ".mkv\n");
+            i = i + 1;
+        }
+        fw.close();
+        String cmd2 = "ffmpeg -f concat -safe 0 -i "+f+" -c copy " + term + ".mkv";
+        pbuild(cmd2);
+        String cmd3 = "rm *temp.mkv";
+        pbuild(cmd3);
+
+        String cmd5 = "ffmpeg -i " + term + ".mkv -vf drawtext=\"fontfile=/path/to/font.ttf: \\ text='" + term + "': fontcolor=white: fontsize=24: box=1: boxcolor=black@0.5: " + "\\" + " boxborderw=5: x=(w-text_w)/2: y=(h-text_h)/2\" -codec:a copy " + term + num + ".mkv";
+        pbuild(cmd5);
+//        String cmd6 = "rm " + term + ".mkv";
+//        pbuild(cmd6);
+        String cmd4 = "rm input.txt";
+//        pbuild(cmd4);
+    }
 
 
 

@@ -11,5 +11,6 @@
       <ListView fx:id="_listView" layoutX="27.0" layoutY="37.0" prefHeight="329.0" prefWidth="200.0" />
       <Button layoutX="417.0" layoutY="115.0" mnemonicParsing="false" onAction="#merge" text="Merge" />
       <TextField fx:id="_tField" layoutX="332.0" layoutY="176.0" />
+      <Button layoutX="416.0" layoutY="37.0" mnemonicParsing="false" onAction="#CombineVwithA" text="Creation" />
    </children>
 </AnchorPane>

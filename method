@@ -1,0 +1,42 @@
+  public void merge(){
+
+
+        StringBuilder files = new StringBuilder();
+        List<String> Files = _listView.getSelectionModel().getSelectedItems();
+
+        if(Files.size()<2 | _tField.getText()==null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Please select two or more files to merge");
+            alert.setTitle("Merging Files");
+
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+
+                }
+
+            });
+        }
+        else {
+            for (int i = 0; i < Files.size(); i++) {
+
+
+                files.append(Files.get(i) + ".wav ");
+
+            }
+            pbuilder.getInstance().probuild("sox " + files.toString() + " " + _tField.getText() + ".wav");
+            pbuilder.getInstance().probuild("rm " + files.toString());
+//            initialize();
+
+            ObservableList<String> selectedRows, allFiles;
+            allFiles = _listView.getItems();
+
+            selectedRows= _listView.getSelectionModel().getSelectedItems();
+            for( String f : selectedRows){
+                allFiles.remove(f);
+            }
+//            initialize();
+
+        }
+
+
+    }
