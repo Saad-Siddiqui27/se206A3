@@ -2,36 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="preview and saving the audio part complete. selecting the text complete. made a helper method for the save method(helpSave).">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/JavaFXApp.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/JavaFXApp.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/car.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/car1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/car2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doggy.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ed.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fasdf.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/se254A3/sample/AudioFiles.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/se254A3/sample/AudioFiles.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/se254A3/sample/CreateController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/se254A3/sample/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/se254A3/sample/MainMenuController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/se254A3/sample/create.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/se254A3/sample/create.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pig1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pig2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pig3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pig4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pig5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pig6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/se254A3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/se206A3.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/some.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/AudioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/AudioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/AudioFiles.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/AudioFiles.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/CreateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/CreateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/create.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/create.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/pbuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/pbuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/text" beforeDir="false" afterPath="$PROJECT_DIR$/text" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tt.wav" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -241,7 +212,7 @@
       <workItem from="1569564752560" duration="9812000" />
       <workItem from="1569653547020" duration="16076000" />
       <workItem from="1569671166299" duration="312000" />
-      <workItem from="1569711117476" duration="5238000" />
+      <workItem from="1569711117476" duration="5843000" />
     </task>
     <servers />
   </component>
